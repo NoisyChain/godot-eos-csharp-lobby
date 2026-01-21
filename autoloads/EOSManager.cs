@@ -18,13 +18,13 @@ public partial class EOSManager : Node
     public const int MAX_LOBBY_SEARCH_RESULTS = 50;
 
     // Set these values as appropriate. For more information, see the Developer Portal documentation.
-    public string m_ProductName = "TestProduct";
+    public string m_ProductName = "MyEpicProduct";
     public string m_ProductVersion = "1.0";
-    public string m_ProductId = "56952852deb74b39b67fb8d26093fb78";
-    public string m_SandboxId = "810c0ec7bcf64e67abe6bb1cfc20dc43";
-    public string m_DeploymentId = "229c0501b8044293baeee7755e632681";
-    public string m_ClientId = "xyza78911kf0MQN4fBNqGFTKNb9h4HY7";
-    public string m_ClientSecret = "CVPiTu3v8MfHX5nhLfEtSNlAa+9QZI1Kx2bEgm9ZU5Q";
+    public string m_ProductId = "";
+    public string m_SandboxId = "";
+    public string m_DeploymentId = "";
+    public string m_ClientId = "";
+    public string m_ClientSecret = "";
     public LoginCredentialType m_LoginCredentialType = LoginCredentialType.AccountPortal;
     public ExternalCredentialType m_ExternalCredentialType = ExternalCredentialType.DeviceidAccessToken;
     // These fields correspond to \<see cref="Credentials.Id" /> and \<see cref="Credentials.Token" />,
