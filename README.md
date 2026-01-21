@@ -21,7 +21,7 @@ Another reason is because the addons out there, like most GDExtension projects, 
 - Authentication with Epic Games account
 - Annonymous connection with Device ID
 - Lobby (Create lobby, Join lobby by ID, Search for lobbies, Lobby and Lobby member attributes)
-- Crossplay
+- Crossplay (Tested platforms: Windows, Linux, Android)
 - P2P chat
 ### Coming someday
 - Connect with Steam (needs Steam App ID)
@@ -33,6 +33,7 @@ Another reason is because the addons out there, like most GDExtension projects, 
 3. Replace the files in the "android" folder by the ones from the ZIP file
 4. Follow the steps [from the EOS Godot page](https://github.com/3ddelano/epic-online-services-godot?tab=readme-ov-file#exporting-for-android) (from step 7)
 5. On *android/build/build.gradle*, at line 133, add your EOS project's client ID;
+
 
 
 
