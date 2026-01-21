@@ -23,7 +23,7 @@ public partial class EOSManager : Node
     public string m_ProductId = "";
     public string m_SandboxId = "";
     public string m_DeploymentId = "";
-    public string m_ClientId = "";
+    public string m_ClientId = ""; // Add this string to your build.gradle file
     public string m_ClientSecret = "";
     public LoginCredentialType m_LoginCredentialType = LoginCredentialType.AccountPortal;
     public ExternalCredentialType m_ExternalCredentialType = ExternalCredentialType.DeviceidAccessToken;
