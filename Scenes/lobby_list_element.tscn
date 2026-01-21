@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgy6ujtvsff3"]
+
+[ext_resource type="Script" uid="uid://b7alnic04wwqc" path="res://Scripts/Lobby System/LobbyListElement.cs" id="1_wm6q5"]
+
+[node name="Body" type="Button" node_paths=PackedStringArray("lobbyName", "gameMode", "members")]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.095679015
+offset_bottom = -31.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+text = "
+"
+script = ExtResource("1_wm6q5")
+lobbyName = NodePath("LobbyName")
+gameMode = NodePath("Mode")
+members = NodePath("Members")
+
+[node name="LobbyName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_right = 212.0
+offset_bottom = 31.0
+text = "God will never forgive you"
+vertical_alignment = 1
+
+[node name="Mode" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.5
+offset_right = 87.5
+offset_bottom = 31.0
+grow_horizontal = 2
+text = "Capture the Flag"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Members" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -186.0
+offset_right = -20.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "12/12 members"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

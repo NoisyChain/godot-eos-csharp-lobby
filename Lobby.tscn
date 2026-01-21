@@ -1,0 +1,587 @@
+[gd_scene load_steps=8 format=3 uid="uid://cu1giyx3h4lfi"]
+
+[ext_resource type="Script" uid="uid://cq5ilshytnp8r" path="res://Scripts/Lobby System/LobbyController.cs" id="1_0y700"]
+[ext_resource type="PackedScene" uid="uid://cpapmg7wbjy5a" path="res://Scenes/lobby_member.tscn" id="1_gv8if"]
+[ext_resource type="Script" uid="uid://dbl7jyxy1a0w4" path="res://Scripts/Lobby System/ConnectionScreen.cs" id="2_ebthy"]
+[ext_resource type="Script" uid="uid://0lt7q5p6684u" path="res://Scripts/Lobby System/LobbyCreationMenu.cs" id="3_kpr1c"]
+[ext_resource type="Script" uid="uid://3w2reff51ve" path="res://Scripts/Lobby System/LobbyScreen.cs" id="4_6juw2"]
+[ext_resource type="Script" uid="uid://dvxatvnhymeaj" path="res://Scripts/Lobby System/LobbySearch.cs" id="4_jjvec"]
+[ext_resource type="PackedScene" uid="uid://bgy6ujtvsff3" path="res://Scenes/lobby_list_element.tscn" id="4_wl2pq"]
+
+[node name="Main" type="Control" node_paths=PackedStringArray("LoginScreen", "LobbyCreationMenu", "LobbyScreen")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0y700")
+LoginScreen = NodePath("ConnectionScreen")
+LobbyCreationMenu = NodePath("LobbyMenu")
+LobbyScreen = NodePath("LobbyScreen")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.673883, 0.40934387, 0.1841133, 1)
+
+[node name="ConnectionScreen" type="Control" parent="." node_paths=PackedStringArray("playerName", "characterSelect")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ebthy")
+playerName = NodePath("PlayerName")
+characterSelect = NodePath("CharacterList")
+
+[node name="Login_Direct" type="Button" parent="ConnectionScreen"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 419.0
+offset_right = 202.0
+offset_bottom = 467.0
+text = "Connect Directly"
+
+[node name="Login_Epic" type="Button" parent="ConnectionScreen"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 482.0
+offset_right = 250.0
+offset_bottom = 530.0
+text = "Login With Epic Account"
+
+[node name="Login_Steam" type="Button" parent="ConnectionScreen"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 543.0
+offset_right = 395.0
+offset_bottom = 591.0
+text = "Authenticate with Steam (Not working yet)"
+
+[node name="PlayerName" type="LineEdit" parent="ConnectionScreen"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 351.0
+offset_right = 375.0
+offset_bottom = 397.0
+placeholder_text = "Player Name"
+
+[node name="CharacterList" type="OptionButton" parent="ConnectionScreen"]
+layout_mode = 0
+offset_left = 438.0
+offset_top = 357.0
+offset_right = 567.0
+offset_bottom = 388.0
+selected = 0
+item_count = 5
+popup/item_0/text = "Yotsuba"
+popup/item_0/id = 0
+popup/item_1/text = "Ell"
+popup/item_1/id = 1
+popup/item_2/text = "Quill"
+popup/item_2/id = 2
+popup/item_3/text = "Matt"
+popup/item_3/id = 3
+popup/item_4/text = "Guirlanda"
+popup/item_4/id = 4
+
+[node name="LobbyMenu" type="Control" parent="." node_paths=PackedStringArray("characterSelect", "lobbyName", "lobbyMaxMembers", "isPrivate", "canInvite", "canCrossplay", "gameMode", "stocks", "allowItems", "lobbyId")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_kpr1c")
+characterSelect = NodePath("../ConnectionScreen/CharacterList")
+lobbyName = NodePath("LobbyName")
+lobbyMaxMembers = NodePath("LobbyMaxMembers")
+isPrivate = NodePath("LobbyPrivateToggle")
+canInvite = NodePath("AllowInvites")
+canCrossplay = NodePath("AllowCrossplay")
+gameMode = NodePath("LobbyGameMode")
+stocks = NodePath("LobbyStocks")
+allowItems = NodePath("LobbyAllowItems")
+lobbyId = NodePath("LobbyID")
+
+[node name="Label_LobbyCreate" type="Label" parent="LobbyMenu"]
+layout_mode = 1
+offset_left = 96.0
+offset_top = 8.0
+offset_right = 300.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 32
+text = "Create Lobby"
+horizontal_alignment = 1
+
+[node name="Label_LobbySearch" type="Label" parent="LobbyMenu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -452.0
+offset_top = 8.0
+offset_right = -219.0
+offset_bottom = 53.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Search Lobbies"
+horizontal_alignment = 1
+
+[node name="Lobby_Create" type="Button" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 497.0
+offset_right = 191.0
+offset_bottom = 553.0
+text = "Create Lobby"
+
+[node name="Lobby_Join" type="Button" parent="LobbyMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -531.0
+offset_top = -83.0
+offset_right = -380.0
+offset_bottom = -27.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Join Lobby by ID"
+
+[node name="Lobby_Refresh" type="Button" parent="LobbyMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -612.0
+offset_right = -26.0
+offset_bottom = -571.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Refresh"
+
+[node name="LobbyName" type="LineEdit" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 103.0
+offset_right = 358.0
+offset_bottom = 149.0
+placeholder_text = "Lobby Name"
+
+[node name="LobbyID" type="LineEdit" parent="LobbyMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -353.0
+offset_top = -83.0
+offset_right = -35.0
+offset_bottom = -37.0
+grow_horizontal = 0
+grow_vertical = 0
+placeholder_text = "Lobby ID"
+
+[node name="LobbyMaxMembers" type="OptionButton" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 168.0
+offset_right = 169.0
+offset_bottom = 199.0
+selected = 0
+item_count = 11
+popup/item_0/text = "2 members"
+popup/item_0/id = 0
+popup/item_1/text = "3 members"
+popup/item_1/id = 1
+popup/item_2/text = "4 members"
+popup/item_2/id = 2
+popup/item_3/text = "5 members"
+popup/item_3/id = 3
+popup/item_4/text = "6 members"
+popup/item_4/id = 4
+popup/item_5/text = "7 members"
+popup/item_5/id = 5
+popup/item_6/text = "8 members"
+popup/item_6/id = 6
+popup/item_7/text = "9 members"
+popup/item_7/id = 7
+popup/item_8/text = "10 members"
+popup/item_8/id = 8
+popup/item_9/text = "11 members"
+popup/item_9/id = 9
+popup/item_10/text = "12 members"
+popup/item_10/id = 10
+
+[node name="LobbyPrivateToggle" type="CheckButton" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 213.0
+offset_right = 131.0
+offset_bottom = 237.0
+
+[node name="AllowInvites" type="CheckBox" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 248.0
+offset_right = 172.0
+offset_bottom = 272.0
+
+[node name="AllowCrossplay" type="CheckBox" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 321.0
+offset_top = 248.0
+offset_right = 345.0
+offset_bottom = 272.0
+
+[node name="LobbyGameMode" type="OptionButton" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 284.0
+offset_right = 320.0
+offset_bottom = 315.0
+selected = 0
+item_count = 5
+popup/item_0/text = "Deathmatch"
+popup/item_0/id = 0
+popup/item_1/text = "Team Deathmatch"
+popup/item_1/id = 1
+popup/item_2/text = "Capture the Flag"
+popup/item_2/id = 2
+popup/item_3/text = "King of the Hill"
+popup/item_3/id = 3
+popup/item_4/text = "A secret option"
+popup/item_4/id = 4
+
+[node name="LobbyStocks" type="OptionButton" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 334.0
+offset_right = 251.0
+offset_bottom = 365.0
+selected = 2
+item_count = 5
+popup/item_0/text = "1"
+popup/item_0/id = 0
+popup/item_1/text = "2"
+popup/item_1/id = 1
+popup/item_2/text = "3"
+popup/item_2/id = 2
+popup/item_3/text = "4"
+popup/item_3/id = 3
+popup/item_4/text = "5"
+popup/item_4/id = 4
+
+[node name="LobbyAllowItems" type="CheckBox" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 384.0
+offset_right = 215.0
+offset_bottom = 408.0
+
+[node name="Label_Invites" type="Label" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 248.0
+offset_right = 138.0
+offset_bottom = 271.0
+text = "Allow invites"
+
+[node name="Label_Crossplay" type="Label" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 248.0
+offset_right = 289.0
+offset_bottom = 271.0
+text = "Allow crossplay"
+
+[node name="Label_Public" type="Label" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 213.0
+offset_right = 87.0
+offset_bottom = 236.0
+text = "Public"
+
+[node name="Label_Private" type="Label" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 213.0
+offset_right = 186.0
+offset_bottom = 236.0
+text = "Private"
+
+[node name="Label_GameMode" type="Label" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 284.0
+offset_right = 95.0
+offset_bottom = 307.0
+text = "Game mode"
+
+[node name="Label_Stocks" type="Label" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 334.0
+offset_right = 134.0
+offset_bottom = 357.0
+text = "Stocks"
+
+[node name="Label_AllowItems" type="Label" parent="LobbyMenu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 384.0
+offset_right = 134.0
+offset_bottom = 407.0
+text = "Allow items"
+
+[node name="LobbyList" type="ScrollContainer" parent="LobbyMenu" node_paths=PackedStringArray("contents")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -670.0
+offset_top = -241.0
+offset_right = -15.0
+offset_bottom = 226.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("4_jjvec")
+lobbyListElement = ExtResource("4_wl2pq")
+contents = NodePath("Contents")
+
+[node name="Contents" type="VBoxContainer" parent="LobbyMenu/LobbyList"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LobbyScreen" type="Control" parent="." node_paths=PackedStringArray("lobbyMemberButtons", "lobbyName", "lobbyMemberCount", "lobbyAttributes", "lobbyIdSpace", "chatMessage", "chatField")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_6juw2")
+lobbyMemberButtons = [NodePath("LobbyMembers/Container/Contents/LobbyMember1"), NodePath("LobbyMembers/Container/Contents/LobbyMember2"), NodePath("LobbyMembers/Container/Contents/LobbyMember3"), NodePath("LobbyMembers/Container/Contents/LobbyMember4"), NodePath("LobbyMembers/Container/Contents/LobbyMember5"), NodePath("LobbyMembers/Container/Contents/LobbyMember6"), NodePath("LobbyMembers/Container/Contents/LobbyMember7"), NodePath("LobbyMembers/Container/Contents/LobbyMember8"), NodePath("LobbyMembers/Container/Contents/LobbyMember9"), NodePath("LobbyMembers/Container/Contents/LobbyMember10"), NodePath("LobbyMembers/Container/Contents/LobbyMember11"), NodePath("LobbyMembers/Container/Contents/LobbyMember12")]
+lobbyName = NodePath("Label_LobbyName")
+lobbyMemberCount = NodePath("Label_LobbyMembers")
+lobbyAttributes = NodePath("Label_LobbyAttributes")
+lobbyIdSpace = NodePath("Label_LobbyID")
+chatMessage = NodePath("ChatMessage")
+chatField = NodePath("ChatWindow")
+
+[node name="Label_LobbyName" type="Label" parent="LobbyScreen"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 291.0
+offset_top = 8.0
+offset_right = 486.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 32
+text = "Lobby Name"
+horizontal_alignment = 1
+
+[node name="Label_LobbyID" type="LineEdit" parent="LobbyScreen"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 74.0
+offset_top = 47.0
+offset_right = 703.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.6039216)
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Lobby ID"
+editable = false
+flat = true
+
+[node name="Label_LobbyAttributes" type="Label" parent="LobbyScreen"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -352.0
+offset_top = 57.0
+offset_right = -13.0
+offset_bottom = 191.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.7764706)
+theme_override_font_sizes/font_size = 20
+text = "Attributes:
+Mode: GameMode
+Stocks: StocksCount
+Use Items: AllowItemUse"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label_LobbyMembers" type="Label" parent="LobbyScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -295.0
+offset_top = 8.0
+offset_right = -100.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 24
+text = "0/12 members"
+horizontal_alignment = 1
+
+[node name="LobbyMembers" type="Control" parent="LobbyScreen"]
+layout_mode = 1
+anchor_top = 0.485
+anchor_bottom = 0.485
+offset_left = 32.0
+offset_top = -207.28
+offset_right = 787.0
+offset_bottom = 243.72
+grow_vertical = 2
+
+[node name="Container" type="ScrollContainer" parent="LobbyScreen/LobbyMembers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Contents" type="VBoxContainer" parent="LobbyScreen/LobbyMembers/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 1
+
+[node name="LobbyMember1" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember2" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember3" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember4" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember5" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember6" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember7" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember8" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember9" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember10" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember11" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="LobbyMember12" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+layout_mode = 2
+
+[node name="Lobby_Quit" type="Button" parent="LobbyScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 87.0
+offset_top = -70.0
+offset_right = 238.0
+offset_bottom = -22.0
+grow_vertical = 0
+text = "Quit Lobby"
+
+[node name="Lobby_Ready" type="Button" parent="LobbyScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 583.0
+offset_top = -70.0
+offset_right = 734.0
+offset_bottom = -22.0
+grow_vertical = 0
+text = "Ready!"
+
+[node name="ChatWindow" type="TextEdit" parent="LobbyScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -356.0
+offset_top = -437.0
+offset_right = -13.0
+offset_bottom = -75.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_readonly_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+text = "Welcome to the lobby!"
+editable = false
+wrap_mode = 1
+scroll_fit_content_width = true
+
+[node name="ChatMessage" type="LineEdit" parent="LobbyScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -357.0
+offset_top = -75.0
+offset_right = -11.0
+offset_bottom = -44.0
+grow_horizontal = 0
+grow_vertical = 2
+placeholder_text = "Talk to people!"
+
+[node name="Chat_SendMessage" type="Button" parent="LobbyScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_top = -44.0
+offset_right = -11.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Send"
+
+[connection signal="pressed" from="ConnectionScreen/Login_Direct" to="ConnectionScreen" method="_on_login_direct_pressed"]
+[connection signal="pressed" from="ConnectionScreen/Login_Epic" to="ConnectionScreen" method="_on_login_epic_pressed"]
+[connection signal="pressed" from="LobbyMenu/Lobby_Create" to="LobbyMenu" method="_on_lobby_create_pressed"]
+[connection signal="pressed" from="LobbyMenu/Lobby_Join" to="LobbyMenu" method="_on_lobby_join_pressed"]
+[connection signal="pressed" from="LobbyMenu/Lobby_Refresh" to="LobbyMenu/LobbyList" method="_on_lobby_refresh_pressed"]
+[connection signal="pressed" from="LobbyScreen/Lobby_Quit" to="LobbyScreen" method="_on_lobby_quit_pressed"]
+[connection signal="pressed" from="LobbyScreen/Lobby_Ready" to="LobbyScreen" method="_on_lobby_ready_pressed"]
+[connection signal="pressed" from="LobbyScreen/Chat_SendMessage" to="LobbyScreen" method="_on_chat_send_message_pressed"]

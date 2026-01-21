@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOS Lobby CSharp", "EOS Lobby CSharp.csproj", "{BCF656BA-75AC-48EB-AE58-6614B82392B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCF656BA-75AC-48EB-AE58-6614B82392B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF656BA-75AC-48EB-AE58-6614B82392B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF656BA-75AC-48EB-AE58-6614B82392B8}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{BCF656BA-75AC-48EB-AE58-6614B82392B8}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{BCF656BA-75AC-48EB-AE58-6614B82392B8}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{BCF656BA-75AC-48EB-AE58-6614B82392B8}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

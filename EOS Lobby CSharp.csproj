@@ -1,0 +1,46 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>EOSLobbyCSharp</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="EOSSDK, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Link>EOSSDK-Win64-Shipping.dll</Link>
+      <HintPath>addons/EOS/SDK/Bin/EOSSDK-Win64-Shipping.dll</HintPath>
+      <HintPath Condition=" '$(GodotTargetPlatform)' == 'linux' ">addons/EOS/SDK/Bin/libEOSSDK-Linux-Shipping.so</HintPath>
+      <HintPath Condition=" '$(GodotTargetPlatform)' == 'android' ">addons/EOS/SDK/Bin/Android/static-stdc++/aar/eossdk-StaticSTDC-release.aar</HintPath>
+      <HintPath Condition=" $([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX))) ">addons/EOS/SDK/Bin/libEOSSDK-Mac-Shipping.dylib</HintPath>
+      <Private>true</Private>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Reference>
+
+    <Content Include="addons/EOS/SDK/Bin/EOSSDK-Win64-Shipping.dll" Condition=" '$(GodotTargetPlatform)' == 'windows' ">
+      <Link>EOSSDK-Win64-Shipping.dll</Link>
+      <Private>true</Private>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="addons/EOS/SDK/Bin/libEOSSDK-Linux-Shipping.so" Condition=" '$(GodotTargetPlatform)' == 'linux' ">
+      <Link>libEOSSDK-Linux-Shipping.so</Link>
+      <Private>true</Private>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="addons/EOS/SDK/Bin/Android/static-stdc++/aar/eossdk-StaticSTDC-release.aar" Condition=" '$(GodotTargetPlatform)' == 'android' ">
+      <Link>addons/EOS/SDK/Bin/Android/static-stdc++/aar/eossdk-StaticSTDC-release.aar</Link>
+      <Private>true</Private>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="addons/EOS/SDK/Bin/libEOSSDK-Mac-Shipping.dylib" Condition="$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))">
+      <Link>libEOSSDK-Mac-Shipping.dylib</Link>
+      <Private>true</Private>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>
