@@ -95,3 +95,5 @@ theme_override_font_sizes/font_size = 20
 text = "YOU"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]

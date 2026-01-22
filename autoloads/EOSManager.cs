@@ -148,6 +148,8 @@ public partial class EOSManager : Node
         {
             throw new Exception("Failed to create platform");
         }
+
+
     }
 
     // Calling tick on a regular interval is required for callbacks to work.
@@ -246,6 +248,7 @@ public partial class EOSManager : Node
         {
             if (loginCallbackInfo.ResultCode == Result.Success)
             {
+                epicID = loginCallbackInfo.LocalUserId;
                 OnConnectionSuccesful();
                 GD.Print("Login succeeded");
             }
@@ -260,19 +263,26 @@ public partial class EOSManager : Node
     void OnConnectionSuccesful()
     {
         UserInfoData? data = CopyUserInfo(epicID);
-        playerName = data != null ? data.Value.DisplayName : "EpicPlayer";
+        if (data == null)
+        {
+            GD.PrintErr("Player data doesn't exist");
+            return;
+        }
 
-        ConnectProduct();
-    }
+        playerName = data.Value.DisplayName;
 
-    void ConnectProduct()
-    {
         var options = new CopyIdTokenOptions()
         {
             AccountId = epicID
         };
 
         s_PlatformInterface.GetAuthInterface().CopyIdToken(ref options, out IdToken? token);
+
+        if (token == null)
+        {
+            GD.PrintErr("Token doesn't exist");
+            return;
+        }
 
         var loginOptions = new Epic.OnlineServices.Connect.LoginOptions()
         {
@@ -506,7 +516,6 @@ public partial class EOSManager : Node
                 lobbyID = lobbyCallbackInfo.LobbyId;
                 lobbyDetails = GetLobbyDetails(lobbyID);
                 socket.SocketName = lobbyID;
-                //playerData.PlayerPlatform = GetUserPlatform();
                 status = ConnectionStatus.Lobby;
                 // Set player attributes
                 foreach(LobbyAttributeStorage playerAtt in playerAttributes)
@@ -555,12 +564,85 @@ public partial class EOSManager : Node
                 status = ConnectionStatus.Succesful;
                 GD.Print("Left lobby successfully");
             }
+            else if (lobbyCallbackInfo.ResultCode == Result.NotFound)
+            {
+                lobbyID = "";
+                lobbyDetails = null;
+                lobbyMembers = new ProductUserId[MAX_LOBBY_MEMBERS];
+                status = ConnectionStatus.Succesful;
+                GD.Print("Lobby not found for some reason. Quitting anyway.");
+            }
             else
             {
                 status = ConnectionStatus.Lobby;
                 GD.Print("Leaving lobby failed: " + lobbyCallbackInfo.ResultCode);
             }
         });
+    }
+
+    public void PromoteLobbyMember(string lobbyID, ProductUserId lobbyOwner, ProductUserId memberToPromote)
+    {
+        var promoteOptions = new PromoteMemberOptions
+        {
+            LobbyId = lobbyID,
+            LocalUserId = lobbyOwner,
+            TargetUserId = memberToPromote
+        };
+
+        s_PlatformInterface.GetLobbyInterface().PromoteMember(ref promoteOptions, null, (ref PromoteMemberCallbackInfo lobbyCallbackInfo) =>
+        {
+            if (lobbyCallbackInfo.ResultCode == Result.Success)
+            {
+                GD.Print($"Lobby member ID {memberToPromote} has been promoted to owner!");
+            }
+            else
+            {
+                GD.Print("Promotion failed: " + lobbyCallbackInfo.ResultCode);
+            }
+        });
+    }
+
+    public void KickFromLobby(string lobbyID, ProductUserId lobbyOwner, ProductUserId memberToKick)
+    {
+        var kickOptions = new KickMemberOptions
+        {
+            LobbyId = lobbyID,
+            LocalUserId = lobbyOwner,
+            TargetUserId = memberToKick
+        };
+
+        s_PlatformInterface.GetLobbyInterface().KickMember(ref kickOptions, null, (ref KickMemberCallbackInfo lobbyCallbackInfo) =>
+        {
+            if (lobbyCallbackInfo.ResultCode == Result.Success)
+            {
+                GD.Print($"Lobby member ID {memberToKick} has been kicked successfully");
+            }
+            else
+            {
+                GD.Print("Kicking from lobby failed: " + lobbyCallbackInfo.ResultCode);
+            }
+        });
+    }
+
+    /*public void CheckGotKickedFromLobby(ProductUserId hostId)
+    {
+        bool? checkLobby = GetLobbyMemberAttribute(ref lobbyDetails, userID, "Ready").AsBool;
+
+        if (checkLobby == null)
+        {
+            lobbyID = "";
+            lobbyDetails = null;
+            lobbyMembers = new ProductUserId[MAX_LOBBY_MEMBERS];
+            status = ConnectionStatus.Succesful;
+        }
+    }*/
+
+    public void GotKickedFromServer()
+    {
+        lobbyID = "";
+        lobbyDetails = null;
+        lobbyMembers = new ProductUserId[MAX_LOBBY_MEMBERS];
+        status = ConnectionStatus.Succesful;
     }
 
     public void SearchLobbies()
@@ -926,6 +1008,7 @@ public partial class EOSManager : Node
         {
             AttrKey = key
         };
+
         lobby.CopyAttributeByKey(ref options, out Epic.OnlineServices.Lobby.Attribute? outAttribute);
 
         if (outAttribute == null) return new AttributeDataValue{};

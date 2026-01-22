@@ -25,7 +25,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
 
-    <Content Include="addons/EOS/SDK/Bin/libEOSSDK-Linux-Shipping.so" Condition=" '$(GodotTargetPlatform)' == 'linux' ">
+    <Content Include="addons/EOS/SDK/Bin/libEOSSDK-Linux-Shipping.so" Condition=" '$(GodotTargetPlatform)' == 'linuxbsd' ">
       <Link>libEOSSDK-Linux-Shipping.so</Link>
       <Private>true</Private>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

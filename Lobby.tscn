@@ -93,6 +93,7 @@ popup/item_4/text = "Guirlanda"
 popup/item_4/id = 4
 
 [node name="LobbyMenu" type="Control" parent="." node_paths=PackedStringArray("characterSelect", "lobbyName", "lobbyMaxMembers", "isPrivate", "canInvite", "canCrossplay", "gameMode", "stocks", "allowItems", "lobbyId")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,17 +161,14 @@ text = "Join Lobby by ID"
 
 [node name="Lobby_Refresh" type="Button" parent="LobbyMenu"]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = -100.0
-offset_top = -612.0
+offset_top = 36.0
 offset_right = -26.0
-offset_bottom = -571.0
+offset_bottom = 77.0
 grow_horizontal = 0
-grow_vertical = 0
 text = "Refresh"
 
 [node name="LobbyName" type="LineEdit" parent="LobbyMenu"]
@@ -351,15 +349,13 @@ text = "Allow items"
 
 [node name="LobbyList" type="ScrollContainer" parent="LobbyMenu" node_paths=PackedStringArray("contents")]
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = -1
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
 offset_left = -670.0
-offset_top = -241.0
+offset_top = 83.0
 offset_right = -15.0
-offset_bottom = 226.0
+offset_bottom = 550.0
 grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("4_jjvec")
@@ -370,8 +366,7 @@ contents = NodePath("Contents")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LobbyScreen" type="Control" parent="." node_paths=PackedStringArray("lobbyMemberButtons", "lobbyName", "lobbyMemberCount", "lobbyAttributes", "lobbyIdSpace", "chatMessage", "chatField")]
-visible = false
+[node name="LobbyScreen" type="Control" parent="." node_paths=PackedStringArray("lobbyMemberButtons", "lobbyName", "lobbyMemberCount", "lobbyAttributes", "lobbyIdSpace", "playerContextMenu", "chatMessage", "chatField")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -384,6 +379,7 @@ lobbyName = NodePath("Label_LobbyName")
 lobbyMemberCount = NodePath("Label_LobbyMembers")
 lobbyAttributes = NodePath("Label_LobbyAttributes")
 lobbyIdSpace = NodePath("Label_LobbyID")
+playerContextMenu = NodePath("PlayerContextMenu")
 chatMessage = NodePath("ChatMessage")
 chatField = NodePath("ChatWindow")
 
@@ -468,41 +464,53 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 1
 
-[node name="LobbyMember1" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember1" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember2" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember2" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember3" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember3" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember4" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember4" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember5" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember5" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember6" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember6" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember7" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember7" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember8" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember8" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember9" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember9" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember10" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember10" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember11" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember11" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
-[node name="LobbyMember12" parent="LobbyScreen/LobbyMembers/Container/Contents" instance=ExtResource("1_gv8if")]
+[node name="LobbyMember12" parent="LobbyScreen/LobbyMembers/Container/Contents" node_paths=PackedStringArray("parent") instance=ExtResource("1_gv8if")]
 layout_mode = 2
+parent = NodePath("../../../..")
 
 [node name="Lobby_Quit" type="Button" parent="LobbyScreen"]
 layout_mode = 1
@@ -577,6 +585,40 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "Send"
 
+[node name="PlayerContextMenu" type="VBoxContainer" parent="LobbyScreen"]
+visible = false
+layout_mode = 0
+offset_right = 167.0
+offset_bottom = 171.0
+
+[node name="Button_Info" type="Button" parent="LobbyScreen/PlayerContextMenu"]
+layout_mode = 2
+disabled = true
+text = "Player Info"
+
+[node name="Button_Challenge" type="Button" parent="LobbyScreen/PlayerContextMenu"]
+layout_mode = 2
+disabled = true
+text = "Challenge Player"
+
+[node name="Button_Friend" type="Button" parent="LobbyScreen/PlayerContextMenu"]
+layout_mode = 2
+disabled = true
+text = "Send Friend Request"
+
+[node name="Button_Report" type="Button" parent="LobbyScreen/PlayerContextMenu"]
+layout_mode = 2
+disabled = true
+text = "Report Player"
+
+[node name="Button_Promote" type="Button" parent="LobbyScreen/PlayerContextMenu"]
+layout_mode = 2
+text = "Promote Player"
+
+[node name="Button_Kick" type="Button" parent="LobbyScreen/PlayerContextMenu"]
+layout_mode = 2
+text = "Kick Player"
+
 [connection signal="pressed" from="ConnectionScreen/Login_Direct" to="ConnectionScreen" method="_on_login_direct_pressed"]
 [connection signal="pressed" from="ConnectionScreen/Login_Epic" to="ConnectionScreen" method="_on_login_epic_pressed"]
 [connection signal="pressed" from="LobbyMenu/Lobby_Create" to="LobbyMenu" method="_on_lobby_create_pressed"]
@@ -585,3 +627,5 @@ text = "Send"
 [connection signal="pressed" from="LobbyScreen/Lobby_Quit" to="LobbyScreen" method="_on_lobby_quit_pressed"]
 [connection signal="pressed" from="LobbyScreen/Lobby_Ready" to="LobbyScreen" method="_on_lobby_ready_pressed"]
 [connection signal="pressed" from="LobbyScreen/Chat_SendMessage" to="LobbyScreen" method="_on_chat_send_message_pressed"]
+[connection signal="pressed" from="LobbyScreen/PlayerContextMenu/Button_Promote" to="LobbyScreen" method="_on_ctx_button_promote_pressed"]
+[connection signal="pressed" from="LobbyScreen/PlayerContextMenu/Button_Kick" to="LobbyScreen" method="_on_ctx_button_kick_pressed"]
