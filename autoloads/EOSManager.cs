@@ -149,7 +149,8 @@ public partial class EOSManager : Node
             throw new Exception("Failed to create platform");
         }
 
-
+        // Refresh player authentication
+        InitializeConnectManager();
     }
 
     // Calling tick on a regular interval is required for callbacks to work.
@@ -344,6 +345,29 @@ public partial class EOSManager : Node
         s_PlatformInterface.GetConnectInterface().CopyProductUserInfo(ref options, out Epic.OnlineServices.Connect.ExternalAccountInfo? info);
 
         return info;
+    }
+
+    public void InitializeConnectManager()
+    {
+        var notifyAuthExpirationOptions = new Epic.OnlineServices.Connect.AddNotifyAuthExpirationOptions();
+
+        // Assign a callback function that will be called when the current authentication is about to expire.
+        s_PlatformInterface.GetConnectInterface().AddNotifyAuthExpiration(ref notifyAuthExpirationOptions, null, OnAuthExpirationNotification);
+    }
+
+    private void OnAuthExpirationNotification(ref Epic.OnlineServices.Connect.AuthExpirationCallbackInfo data)
+    {
+        GD.Print("Player authentication is about to expire! Refreshing authentication...");
+
+        // Log in using a new ID Token.
+        if (m_ExternalCredentialType == ExternalCredentialType.EpicIdToken)
+        {
+            OnConnectionSuccesful();
+        }
+        else if (m_ExternalCredentialType == ExternalCredentialType.DeviceidAccessToken)
+        {
+            LoginWithDeviceID();
+        }
     }
 #endregion
 

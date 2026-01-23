@@ -12,9 +12,9 @@
       <SpecificVersion>False</SpecificVersion>
       <Link>EOSSDK-Win64-Shipping.dll</Link>
       <HintPath>addons/EOS/SDK/Bin/EOSSDK-Win64-Shipping.dll</HintPath>
-      <HintPath Condition=" '$(GodotTargetPlatform)' == 'linux' ">addons/EOS/SDK/Bin/libEOSSDK-Linux-Shipping.so</HintPath>
+      <HintPath Condition=" '$(GodotTargetPlatform)' == 'linuxbsd' ">addons/EOS/SDK/Bin/libEOSSDK-Linux-Shipping.so</HintPath>
       <HintPath Condition=" '$(GodotTargetPlatform)' == 'android' ">addons/EOS/SDK/Bin/Android/static-stdc++/aar/eossdk-StaticSTDC-release.aar</HintPath>
-      <HintPath Condition=" $([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX))) ">addons/EOS/SDK/Bin/libEOSSDK-Mac-Shipping.dylib</HintPath>
+      <HintPath Condition=" '$(GodotTargetPlatform)' == 'macos' ">addons/EOS/SDK/Bin/libEOSSDK-Mac-Shipping.dylib</HintPath>
       <Private>true</Private>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Reference>
@@ -37,7 +37,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
 
-    <Content Include="addons/EOS/SDK/Bin/libEOSSDK-Mac-Shipping.dylib" Condition="$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))">
+    <Content Include="addons/EOS/SDK/Bin/libEOSSDK-Mac-Shipping.dylib" Condition=" '$(GodotTargetPlatform)' == 'macos' ">
       <Link>libEOSSDK-Mac-Shipping.dylib</Link>
       <Private>true</Private>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
